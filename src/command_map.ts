@@ -1,10 +1,9 @@
 import { State } from "./state.js";
-import { fetchLocationAreas } from "./pokeapi.js";
 
 export async function commandMap(state: State): Promise<void> {
   try {
     const url = state.nextLocationAreaURL ?? undefined;
-    const data = await fetchLocationAreas(url);
+    const data = await state.pokeapi.fetchLocationAreas(url);
 
     state.nextLocationAreaURL = data.next;
     state.prevLocationAreaURL = data.previous;
@@ -24,7 +23,7 @@ export async function commandMapb(state: State): Promise<void> {
   }
 
   try {
-    const data = await fetchLocationAreas(state.prevLocationAreaURL);
+    const data = await state.pokeapi.fetchLocationAreas(state.prevLocationAreaURL);
 
     state.nextLocationAreaURL = data.next;
     state.prevLocationAreaURL = data.previous;

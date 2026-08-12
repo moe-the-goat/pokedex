@@ -3,6 +3,7 @@ import process from "node:process";
 import { commandExit } from "./command_exit.js";
 import { commandHelp } from "./command_help.js";
 import { commandMap, commandMapb } from "./command_map.js";
+import { PokeAPI } from "./pokeapi.js";
 
 export type CLICommand = {
   name: string;
@@ -13,6 +14,7 @@ export type CLICommand = {
 export type State = {
   readline: Interface;
   commands: Record<string, CLICommand>;
+  pokeapi: PokeAPI;
   nextLocationAreaURL: string | null;
   prevLocationAreaURL: string | null;
 };
@@ -50,6 +52,7 @@ export function initState(): State {
   return {
     readline: rl,
     commands,
+    pokeapi: new PokeAPI(10000),
     nextLocationAreaURL: null,
     prevLocationAreaURL: null,
   };
