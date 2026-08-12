@@ -1,0 +1,27 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/main.js",
+    "dev": "npx tsc && node dist/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moe-the-goat/pokedex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moe-the-goat/pokedex/issues"
+  },
+  "homepage": "https://github.com/moe-the-goat/pokedex#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "typescript": "^7.0.2"
+  },
+  "type": "module"
+}
