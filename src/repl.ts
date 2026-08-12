@@ -11,7 +11,7 @@ export function cleanInput(text: string): string[] {
 export function startREPL(state: State) {
   state.readline.prompt();
 
-  state.readline.on("line", (line: string) => {
+  state.readline.on("line", async (line: string) => {
     const cleaned = cleanInput(line);
     if (cleaned.length === 0) {
       state.readline.prompt();
@@ -23,7 +23,7 @@ export function startREPL(state: State) {
 
     if (command) {
       try {
-        command.callback(state);
+        await command.callback(state);
       } catch (err) {
         console.error(err);
       }
