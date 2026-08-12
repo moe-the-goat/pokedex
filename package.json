@@ -5,7 +5,8 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/main.js",
-    "dev": "npx tsc && node dist/main.js"
+    "dev": "npx tsc && node dist/main.js",
+    "test": "vitest --run"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,8 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^26.2.0",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
   },
   "type": "module"
 }
