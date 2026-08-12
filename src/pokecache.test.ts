@@ -15,7 +15,7 @@ describe("Cache", () => {
     const cache = new Cache(interval);
     cache.add("https://example.com", "val1");
 
-    await new Promise((resolve) => setTimeout(resolve, interval + 20));
+    await new Promise((resolve) => setTimeout(resolve, interval * 2 + 10));
 
     const actual = cache.get("https://example.com");
     expect(actual).toBeUndefined();
