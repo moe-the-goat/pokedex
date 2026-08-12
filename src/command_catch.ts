@@ -18,6 +18,7 @@ export async function commandCatch(state: State, ...args: string[]): Promise<voi
 
     if (rolled <= catchChance) {
       console.log(`${pokemonName} was caught!`);
+      console.log("You may now inspect it with the inspect command.");
       state.pokedex[pokemonName] = pokemon;
     } else {
       console.log(`${pokemonName} escaped!`);
