@@ -1,4 +1,5 @@
-import readline from "readline";
+import * as readline from "node:readline";
+import process from "node:process";
 
 export function cleanInput(text: string): string[] {
   return text
@@ -17,7 +18,7 @@ export function startREPL() {
 
   rl.prompt();
 
-  rl.on("line", (line) => {
+  rl.on("line", (line: string) => {
     const cleaned = cleanInput(line);
     if (cleaned.length === 0) {
       rl.prompt();
