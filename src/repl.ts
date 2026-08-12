@@ -1,5 +1,6 @@
 import * as readline from "node:readline";
 import process from "node:process";
+import { getCommands } from "./command.js";
 
 export function cleanInput(text: string): string[] {
   return text
@@ -10,6 +11,8 @@ export function cleanInput(text: string): string[] {
 }
 
 export function startREPL() {
+  const commands = getCommands();
+
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -25,7 +28,19 @@ export function startREPL() {
       return;
     }
 
-    console.log(`Your command was: ${cleaned[0]}`);
+    const commandName = cleaned[0];
+    const command = commands[commandName];
+
+    if (command) {
+      try {
+        command.callback(commands);
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      console.log("Unknown command");
+    }
+
     rl.prompt();
   });
 }
