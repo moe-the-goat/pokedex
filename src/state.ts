@@ -3,12 +3,13 @@ import process from "node:process";
 import { commandExit } from "./command_exit.js";
 import { commandHelp } from "./command_help.js";
 import { commandMap, commandMapb } from "./command_map.js";
+import { commandExplore } from "./command_explore.js";
 import { PokeAPI } from "./pokeapi.js";
 
 export type CLICommand = {
   name: string;
   description: string;
-  callback: (state: State) => void | Promise<void>;
+  callback: (state: State, ...args: string[]) => void | Promise<void>;
 };
 
 export type State = {
@@ -46,6 +47,11 @@ export function initState(): State {
       name: "mapb",
       description: "Displays the previous 20 location areas",
       callback: commandMapb,
+    },
+    explore: {
+      name: "explore",
+      description: "Explores a location area to find Pokémon",
+      callback: commandExplore,
     },
   };
 

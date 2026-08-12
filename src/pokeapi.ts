@@ -12,6 +12,15 @@ export type ShallowLocations = {
   results: LocationArea[];
 };
 
+export type LocationAreaDetail = {
+  pokemon_encounters: {
+    pokemon: {
+      name: string;
+      url: string;
+    };
+  }[];
+};
+
 export class PokeAPI {
   #cache: Cache;
 
@@ -33,6 +42,24 @@ export class PokeAPI {
     }
 
     const data: ShallowLocations = await res.json();
+    this.#cache.add(url, data);
+    return data;
+  }
+
+  async fetchLocationArea(areaName: string): Promise<LocationAreaDetail> {
+    const url = `https://pokeapi.co/api/v2/location-area/${areaName}`;
+
+    const cached = this.#cache.get<LocationAreaDetail>(url);
+    if (cached) {
+      return cached;
+    }
+
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch location area ${areaName}: ${res.statusText}`);
+    }
+
+    const data: LocationAreaDetail = await res.json();
     this.#cache.add(url, data);
     return data;
   }
